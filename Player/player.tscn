@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://db32uttluf1m" path="res://sprites/player/run/player-run-6.png" id="20_8hg6w"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6hasj"]
+radius = 8.0
+height = 20.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qs0x6"]
 animations = [{
@@ -267,11 +269,13 @@ _data = {
 script = ExtResource("1_f3eyx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 5)
 shape = SubResource("CapsuleShape2D_6hasj")
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qs0x6")
 animation = &"idle"
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.6, 1.6)

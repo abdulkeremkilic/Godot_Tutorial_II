@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmntk3g7qxw0x"]
+[gd_scene load_steps=3 format=3 uid="uid://dmntk3g7qxw0x"]
 
 [ext_resource type="Script" path="res://main.cs" id="1_pxeat"]
+[ext_resource type="PackedScene" uid="uid://qx7xom2yb23b" path="res://bg.tscn" id="2_8xt66"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_pxeat")
@@ -24,6 +25,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Quit
 "
+
+[node name="BG" parent="." instance=ExtResource("2_8xt66")]
 
 [connection signal="pressed" from="PlayButton" to="." method="onPlayButtonPressed"]
 [connection signal="pressed" from="QuitButton" to="." method="onQuitButtonPressed"]

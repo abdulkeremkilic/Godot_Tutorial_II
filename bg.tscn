@@ -8,6 +8,7 @@
 script = ExtResource("1_6g707")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.2, 1)
 motion_mirroring = Vector2(1152, 0)
 
 [node name="Back" type="Sprite2D" parent="ParallaxLayer"]

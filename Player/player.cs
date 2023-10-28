@@ -5,10 +5,13 @@ public partial class player : CharacterBody2D
 {
 	private const float Speed = 300.0f;
 	private const float JumpVelocity = -400.0f;
+	private const float bounceVelocity = -200.0f;
+	public long health = 10; //if 0 make gameOver screen and replay screen
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	private float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 	private AnimationPlayer animations;
+	Vector2 velocity;
 
     public override void _Ready()
     {
@@ -17,7 +20,12 @@ public partial class player : CharacterBody2D
     }
     public override void _PhysicsProcess(double delta)
 	{
-		Vector2 velocity = Velocity;
+
+		if(this.health <= 0) {
+			GetTree().ChangeSceneToFile("res://gameOver.tscn");
+		}
+
+		velocity = Velocity;
 
 		// Add the gravity.
 		if (!IsOnFloor())
@@ -56,5 +64,12 @@ public partial class player : CharacterBody2D
 
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+	private void onBodyEntered(Node2D body) {
+		if(body.IsInGroup("Mob")) {
+			this.velocity.Y = bounceVelocity;
+			Velocity = velocity;
+		}
 	}
 }

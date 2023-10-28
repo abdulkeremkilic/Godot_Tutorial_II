@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dk12soygryon8"]
+[gd_scene load_steps=9 format=3 uid="uid://dk12soygryon8"]
 
 [ext_resource type="PackedScene" uid="uid://iwn3dwvatmjr" path="res://Player/player.tscn" id="1_lux32"]
 [ext_resource type="Texture2D" uid="uid://b8h5k6ckyoouu" path="res://sprites/tileset.png" id="1_rdgoa"]
 [ext_resource type="PackedScene" uid="uid://qx7xom2yb23b" path="res://bg.tscn" id="1_t3gfw"]
+[ext_resource type="Script" path="res://Mobs.cs" id="4_g8h15"]
 [ext_resource type="PackedScene" uid="uid://d1vdhhqvhtayb" path="res://frog.tscn" id="4_qcm71"]
+[ext_resource type="Script" path="res://HP.cs" id="5_euabl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wcpf7"]
 texture = ExtResource("1_rdgoa")
@@ -428,6 +430,22 @@ layer_0/tile_data = PackedInt32Array(1703940, 65536, 1, 1703941, 65536, 1, 17039
 position = Vector2(430, 276)
 
 [node name="Mobs" type="Node2D" parent="."]
+script = ExtResource("4_g8h15")
 
 [node name="Frog" parent="Mobs" instance=ExtResource("4_qcm71")]
 position = Vector2(648, 312)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HP" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "HP:"
+script = ExtResource("5_euabl")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="Mobs" method="onTimeout"]

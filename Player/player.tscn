@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://iwn3dwvatmjr"]
+[gd_scene load_steps=30 format=3 uid="uid://iwn3dwvatmjr"]
 
 [ext_resource type="Script" path="res://Player/player.cs" id="1_f3eyx"]
 [ext_resource type="Texture2D" uid="uid://b221vqfcug7aa" path="res://sprites/player/climb/player-climb-1.png" id="2_blefq"]
@@ -265,6 +265,9 @@ _data = {
 "run": SubResource("Animation_03qwd")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jfqfr"]
+size = Vector2(8, 12)
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(269, 141)
 script = ExtResource("1_f3eyx")
@@ -288,3 +291,11 @@ limit_top = 0
 libraries = {
 "": SubResource("AnimationLibrary_dbknl")
 }
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(-1, 11)
+shape = SubResource("RectangleShape2D_jfqfr")
+
+[connection signal="body_entered" from="AttackArea" to="." method="onBodyEntered"]

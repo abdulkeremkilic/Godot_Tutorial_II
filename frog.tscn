@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d1vdhhqvhtayb"]
+[gd_scene load_steps=24 format=3 uid="uid://d1vdhhqvhtayb"]
 
 [ext_resource type="Script" path="res://frog.cs" id="1_4vwdw"]
 [ext_resource type="Texture2D" uid="uid://cc1qbcno2s44c" path="res://sprites/enemy-death/enemy-death-1.png" id="1_kddxe"]
@@ -14,8 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://cebp3m46wkeg5" path="res://sprites/frog/idle/frog-idle-4.png" id="11_a6xpj"]
 [ext_resource type="Texture2D" uid="uid://ctl2b1dvw424s" path="res://sprites/frog/jump/frog-jump-1.png" id="12_vtryk"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qyuhd"]
-size = Vector2(24, 17)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wlwec"]
+size = Vector2(26, 14.5)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iyvno"]
 animations = [{
@@ -120,10 +120,9 @@ tracks/1/keys = {
 "values": [0, 1]
 }
 
-[sub_resource type="Animation" id="Animation_umlf8"]
-resource_name = "run"
+[sub_resource type="Animation" id="Animation_0l0f4"]
+resource_name = "death"
 length = 0.6
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -134,7 +133,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"jump"]
+"values": [&"death"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -143,10 +142,10 @@ tracks/1/path = NodePath("Animations:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2]
+"values": [0, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_7hkja"]
@@ -179,29 +178,66 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
+[sub_resource type="Animation" id="Animation_umlf8"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"jump"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u1do0"]
 _data = {
 "RESET": SubResource("Animation_uc6xy"),
+"death": SubResource("Animation_0l0f4"),
 "idle": SubResource("Animation_7hkja"),
 "jump": SubResource("Animation_umlf8")
 }
 
-[node name="Frog" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lutl1"]
+size = Vector2(23, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p24qw"]
+size = Vector2(28, 14)
+
+[node name="Frog" type="CharacterBody2D" groups=["Mob"]]
 script = ExtResource("1_4vwdw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1)
-shape = SubResource("RectangleShape2D_qyuhd")
+position = Vector2(0, -1.25)
+shape = SubResource("RectangleShape2D_wlwec")
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
-position = Vector2(2, -3)
+position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_iyvno")
 animation = &"jump"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="PlayerDetection" type="Area2D" parent="."]
 visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+visible = false
 shape = SubResource("CircleShape2D_gdb6q")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -209,5 +245,19 @@ libraries = {
 "": SubResource("AnimationLibrary_u1do0")
 }
 
-[connection signal="body_entered" from="Area2D" to="." method="onBodyEntered"]
-[connection signal="body_exited" from="Area2D" to="." method="onBodyExit"]
+[node name="HurtArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
+position = Vector2(0.5, -3)
+shape = SubResource("RectangleShape2D_lutl1")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("RectangleShape2D_p24qw")
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="onBodyEntered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="onBodyExit"]
+[connection signal="body_entered" from="HurtArea" to="." method="onHurtAreaEntered"]
+[connection signal="body_entered" from="AttackArea" to="." method="onAttackFallBack"]
+[connection signal="body_entered" from="AttackArea" to="." method="onPlayerCollitionEntered"]

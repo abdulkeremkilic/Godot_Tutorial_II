@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://hce3phb87o5y"]
+
+[ext_resource type="Script" path="res://gameOver.cs" id="1_wilxn"]
+[ext_resource type="PackedScene" uid="uid://qx7xom2yb23b" path="res://bg.tscn" id="2_noo80"]
+
+[node name="gameOver" type="Node2D"]
+script = ExtResource("1_wilxn")
+
+[node name="BG" parent="." instance=ExtResource("2_noo80")]
+
+[node name="Play Again" type="Button" parent="."]
+offset_left = 424.0
+offset_top = 48.0
+offset_right = 632.0
+offset_bottom = 144.0
+text = "PLAY AGAIN"
+
+[node name="Main Menu" type="Button" parent="."]
+offset_left = 424.0
+offset_top = 184.0
+offset_right = 632.0
+offset_bottom = 280.0
+text = "MAIN MENU"
+
+[connection signal="pressed" from="Play Again" to="." method="onPlayAgainButtonPressed"]
+[connection signal="pressed" from="Main Menu" to="." method="onMainMenuButtonPressed"]

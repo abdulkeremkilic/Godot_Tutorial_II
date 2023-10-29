@@ -10,9 +10,9 @@ public partial class Mobs : Node2D
 		CharacterBody2D mob = mobScene.Instantiate<CharacterBody2D>();
 		GD.Print(mob.GetGroups());
 		GD.Randomize();
-		mob.Position = new Vector2(GD.RandRange(50, 750), GD.RandRange(0, 35));
-		
-	
-		this.AddChild(mob);
+		mob.Position = new Vector2(GD.RandRange(50, 1500), GD.RandRange(0, 35));
+
+		if(this.GetChildCount() < MAX_MOB)
+			this.AddChild(mob);
 	}
 }

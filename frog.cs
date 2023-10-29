@@ -77,7 +77,6 @@ public partial class frog : CharacterBody2D
 			isChasing = false;
 			animations.Play("death");
 			this.QueueFree();
-
 		}
 	}
 

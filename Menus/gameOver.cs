@@ -6,12 +6,12 @@ public partial class gameOver : Node2D
 
 	private void onPlayAgainButtonPressed()
 	{
-		GetTree().ChangeSceneToFile("res://world.tscn");
+		GetTree().ChangeSceneToFile("res://World/world.tscn");
 	}
 
 	private void onMainMenuButtonPressed()
 	{
-		GetTree().ChangeSceneToFile("res://main.tscn");
+		GetTree().ChangeSceneToFile("res://Menus/main.tscn");
 	}
 
 }

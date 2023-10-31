@@ -4,10 +4,6 @@ using System;
 public partial class frog : CharacterBody2D
 {
 	private float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
-	private const float Speed = 50f;
-	private const float fallBackVelocityY = -400f;
-	private const float fallBackVelocityX = 200f;
-
 	private AnimationPlayer animations;
 	private Boolean isChasing = false;
 	private player player;
@@ -19,13 +15,12 @@ public partial class frog : CharacterBody2D
 	{
 		animations = GetNode<AnimationPlayer>("AnimationPlayer");
 		animations.Play("idle");
+		player = (player)GetNode<CharacterBody2D>("../../Player/Player");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		velocity = Velocity;
-		player = (player)GetNode<CharacterBody2D>("../../Player/Player");
-
 
 		if (!IsOnFloor())
 		{
@@ -34,10 +29,10 @@ public partial class frog : CharacterBody2D
 		}
 
 
-		if (isChasing)
+		if (isChasing && velocity.Y == 0)
 		{
 
-			direction = (player.Position - this.Position).Normalized();
+			direction = (player.Position - this.Position).Normalized(); //Player's location
 			if (direction.X > 0)
 				GetNode<AnimatedSprite2D>("Animations").FlipH = true;
 			else
@@ -45,9 +40,9 @@ public partial class frog : CharacterBody2D
 
 			animations.Play("jump");
 			//if collides attack!
-			velocity.X = direction.X * Speed;
+			velocity.X = direction.X * Globals.MOB_SPEED;
 		}
-		else
+		else if (!isChasing)
 		{
 			animations.Play("idle");
 			velocity.X = 0;
@@ -84,7 +79,8 @@ public partial class frog : CharacterBody2D
 	{
 		if (body.Name == "Player")
 		{
-			this.player.health -= 2;
+			//this.player.health -= 2;
+			//add health here for 
 		}
 	}
 
@@ -92,9 +88,9 @@ public partial class frog : CharacterBody2D
 	{
 		if (body.Name == "Player")
 		{
-			direction = (player.Position + this.Position).Normalized();
-			this.velocity.Y = fallBackVelocityY;
-			this.velocity.X = direction.X * fallBackVelocityX; // TODO: doesnt work check why
+			direction = (player.Position - this.Position).Normalized();
+			this.velocity.X = direction.X * Globals.BOUNCE_VELOCITY_X;
+			this.velocity.Y = Globals.BOUNCE_VELOCITY_Y;
 			Velocity = velocity;
 		}
 	}

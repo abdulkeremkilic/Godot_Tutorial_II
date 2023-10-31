@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmntk3g7qxw0x"]
 
-[ext_resource type="Script" path="res://main.cs" id="1_pxeat"]
-[ext_resource type="PackedScene" uid="uid://qx7xom2yb23b" path="res://bg.tscn" id="2_8xt66"]
+[ext_resource type="Script" path="res://Menus/main.cs" id="1_pxeat"]
+[ext_resource type="PackedScene" uid="uid://qx7xom2yb23b" path="res://Menus/bg.tscn" id="2_8xt66"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_pxeat")
@@ -14,15 +14,17 @@ offset_bottom = 194.0
 scale = Vector2(1.50187, 1.5322)
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_font_sizes/font_size = 30
 text = "PLAY"
 
 [node name="QuitButton" type="Button" parent="."]
 offset_left = 414.0
 offset_top = 323.0
-offset_right = 773.0
-offset_bottom = 544.0
+offset_right = 783.0
+offset_bottom = 549.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_font_sizes/font_size = 50
 text = "Quit
 "
 

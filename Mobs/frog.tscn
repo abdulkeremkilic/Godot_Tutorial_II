@@ -1,18 +1,18 @@
 [gd_scene load_steps=24 format=3 uid="uid://d1vdhhqvhtayb"]
 
-[ext_resource type="Script" path="res://frog.cs" id="1_4vwdw"]
-[ext_resource type="Texture2D" uid="uid://cc1qbcno2s44c" path="res://sprites/enemy-death/enemy-death-1.png" id="1_kddxe"]
-[ext_resource type="Texture2D" uid="uid://bot4jycg5r4ed" path="res://sprites/enemy-death/enemy-death-2.png" id="2_4jc80"]
-[ext_resource type="Texture2D" uid="uid://1bxnds7g80d0" path="res://sprites/enemy-death/enemy-death-3.png" id="3_n0mxp"]
-[ext_resource type="Texture2D" uid="uid://vhc08nv63a0p" path="res://sprites/enemy-death/enemy-death-4.png" id="4_tmoaf"]
-[ext_resource type="Texture2D" uid="uid://fyisxl2d4tv3" path="res://sprites/enemy-death/enemy-death-5.png" id="5_7ekvl"]
-[ext_resource type="Texture2D" uid="uid://cv3jm3si84n17" path="res://sprites/enemy-death/enemy-death-6.png" id="6_j0td2"]
-[ext_resource type="Texture2D" uid="uid://co5ak2p780kj1" path="res://sprites/frog/jump/frog-jump-2.png" id="7_qmip1"]
-[ext_resource type="Texture2D" uid="uid://c5yyee75q4g3k" path="res://sprites/frog/idle/frog-idle-1.png" id="8_olcss"]
-[ext_resource type="Texture2D" uid="uid://d0a7tisoemnnx" path="res://sprites/frog/idle/frog-idle-2.png" id="9_rw8tv"]
-[ext_resource type="Texture2D" uid="uid://o01f3c6ftu3c" path="res://sprites/frog/idle/frog-idle-3.png" id="10_tywsb"]
-[ext_resource type="Texture2D" uid="uid://cebp3m46wkeg5" path="res://sprites/frog/idle/frog-idle-4.png" id="11_a6xpj"]
-[ext_resource type="Texture2D" uid="uid://ctl2b1dvw424s" path="res://sprites/frog/jump/frog-jump-1.png" id="12_vtryk"]
+[ext_resource type="Script" path="res://Mobs/frog.cs" id="1_suloj"]
+[ext_resource type="Texture2D" uid="uid://cc1qbcno2s44c" path="res://sprites/enemy-death/enemy-death-1.png" id="2_c1xmr"]
+[ext_resource type="Texture2D" uid="uid://bot4jycg5r4ed" path="res://sprites/enemy-death/enemy-death-2.png" id="3_4e56j"]
+[ext_resource type="Texture2D" uid="uid://1bxnds7g80d0" path="res://sprites/enemy-death/enemy-death-3.png" id="4_p02xm"]
+[ext_resource type="Texture2D" uid="uid://vhc08nv63a0p" path="res://sprites/enemy-death/enemy-death-4.png" id="5_8b0y7"]
+[ext_resource type="Texture2D" uid="uid://fyisxl2d4tv3" path="res://sprites/enemy-death/enemy-death-5.png" id="6_xrd8e"]
+[ext_resource type="Texture2D" uid="uid://cv3jm3si84n17" path="res://sprites/enemy-death/enemy-death-6.png" id="7_n2fx4"]
+[ext_resource type="Texture2D" uid="uid://c5yyee75q4g3k" path="res://sprites/frog/idle/frog-idle-1.png" id="8_2n5tx"]
+[ext_resource type="Texture2D" uid="uid://d0a7tisoemnnx" path="res://sprites/frog/idle/frog-idle-2.png" id="9_42nn0"]
+[ext_resource type="Texture2D" uid="uid://o01f3c6ftu3c" path="res://sprites/frog/idle/frog-idle-3.png" id="10_jgwhd"]
+[ext_resource type="Texture2D" uid="uid://cebp3m46wkeg5" path="res://sprites/frog/idle/frog-idle-4.png" id="11_65h7s"]
+[ext_resource type="Texture2D" uid="uid://ctl2b1dvw424s" path="res://sprites/frog/jump/frog-jump-1.png" id="12_hym5a"]
+[ext_resource type="Texture2D" uid="uid://co5ak2p780kj1" path="res://sprites/frog/jump/frog-jump-2.png" id="13_iy00b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wlwec"]
 size = Vector2(26, 14.5)
@@ -21,22 +21,22 @@ size = Vector2(26, 14.5)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_kddxe")
+"texture": ExtResource("2_c1xmr")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_4jc80")
+"texture": ExtResource("3_4e56j")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_n0mxp")
+"texture": ExtResource("4_p02xm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_tmoaf")
+"texture": ExtResource("5_8b0y7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_7ekvl")
+"texture": ExtResource("6_xrd8e")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_j0td2")
+"texture": ExtResource("7_n2fx4")
 }],
 "loop": true,
 "name": &"death",
@@ -44,31 +44,31 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("8_olcss")
+"texture": ExtResource("8_2n5tx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_rw8tv")
+"texture": ExtResource("9_42nn0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_tywsb")
+"texture": ExtResource("10_jgwhd")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_a6xpj")
+"texture": ExtResource("11_65h7s")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_olcss")
+"texture": ExtResource("8_2n5tx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_olcss")
+"texture": ExtResource("8_2n5tx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_olcss")
+"texture": ExtResource("8_2n5tx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_olcss")
+"texture": ExtResource("8_2n5tx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_olcss")
+"texture": ExtResource("8_2n5tx")
 }],
 "loop": true,
 "name": &"idle",
@@ -76,13 +76,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("12_vtryk")
+"texture": ExtResource("12_hym5a")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_qmip1")
+"texture": ExtResource("13_iy00b")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_olcss")
+"texture": ExtResource("8_2n5tx")
 }],
 "loop": true,
 "name": &"jump",
@@ -222,7 +222,7 @@ size = Vector2(23, 16)
 size = Vector2(28, 14)
 
 [node name="Frog" type="CharacterBody2D" groups=["Mob"]]
-script = ExtResource("1_4vwdw")
+script = ExtResource("1_suloj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.25)
@@ -259,5 +259,5 @@ shape = SubResource("RectangleShape2D_p24qw")
 [connection signal="body_entered" from="PlayerDetection" to="." method="onBodyEntered"]
 [connection signal="body_exited" from="PlayerDetection" to="." method="onBodyExit"]
 [connection signal="body_entered" from="HurtArea" to="." method="onHurtAreaEntered"]
-[connection signal="body_entered" from="AttackArea" to="." method="onAttackFallBack"]
 [connection signal="body_entered" from="AttackArea" to="." method="onPlayerCollitionEntered"]
+[connection signal="body_entered" from="AttackArea" to="." method="onAttackFallBack"]

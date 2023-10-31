@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://iwn3dwvatmjr" path="res://Player/player.tscn" id="1_lux32"]
 [ext_resource type="Texture2D" uid="uid://b8h5k6ckyoouu" path="res://sprites/tileset.png" id="1_rdgoa"]
-[ext_resource type="PackedScene" uid="uid://qx7xom2yb23b" path="res://bg.tscn" id="1_t3gfw"]
-[ext_resource type="Script" path="res://Mobs.cs" id="4_g8h15"]
-[ext_resource type="PackedScene" uid="uid://d1vdhhqvhtayb" path="res://frog.tscn" id="4_qcm71"]
-[ext_resource type="Script" path="res://HP.cs" id="5_euabl"]
-[ext_resource type="Script" path="res://mobCount.cs" id="7_7j0wn"]
-[ext_resource type="Script" path="res://score.cs" id="8_fcksc"]
+[ext_resource type="PackedScene" uid="uid://qx7xom2yb23b" path="res://Menus/bg.tscn" id="1_t3gfw"]
+[ext_resource type="PackedScene" uid="uid://d1vdhhqvhtayb" path="res://Mobs/frog.tscn" id="4_qcm71"]
+[ext_resource type="Script" path="res://Mobs/Utils/Mobs.cs" id="4_r8rf3"]
+[ext_resource type="Script" path="res://UI/HP.cs" id="6_8sx1h"]
+[ext_resource type="Script" path="res://Mobs/Utils/mobCount.cs" id="7_h36l8"]
+[ext_resource type="Script" path="res://UI/score.cs" id="8_4x04t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wcpf7"]
 texture = ExtResource("1_rdgoa")
@@ -432,7 +432,7 @@ layer_0/tile_data = PackedInt32Array(1703940, 65536, 1, 1703941, 65536, 1, 17039
 position = Vector2(430, 276)
 
 [node name="Mobs" type="Node2D" parent="."]
-script = ExtResource("4_g8h15")
+script = ExtResource("4_r8rf3")
 
 [node name="Frog" parent="Mobs" instance=ExtResource("4_qcm71")]
 position = Vector2(648, 312)
@@ -445,7 +445,7 @@ offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "HP:"
-script = ExtResource("5_euabl")
+script = ExtResource("6_8sx1h")
 
 [node name="Mob Count" type="Label" parent="UI"]
 offset_top = 90.0
@@ -454,7 +454,7 @@ offset_bottom = 128.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
 text = "Mob Count: "
-script = ExtResource("7_7j0wn")
+script = ExtResource("7_h36l8")
 
 [node name="Score" type="Label" parent="UI"]
 offset_top = 45.0
@@ -463,7 +463,7 @@ offset_bottom = 90.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "SCORE: "
-script = ExtResource("8_fcksc")
+script = ExtResource("8_4x04t")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

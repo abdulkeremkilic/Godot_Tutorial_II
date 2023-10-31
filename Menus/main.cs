@@ -11,7 +11,7 @@ public partial class main : Node2D
 
 	private void onPlayButtonPressed()
 	{
-		GetTree().ChangeSceneToFile("res://world.tscn");
+		GetTree().ChangeSceneToFile("res://World/world.tscn");
 	}
 
 }

@@ -10,5 +10,6 @@ public partial class Globals : Node
 	public const float BOUNCE_VELOCITY_X = -100.0f;
 	public const int MAX_JUMP_LIMIT = 1;
 	public const int MAX_SLIDE_LIMIT = 1;
+	public const long MAX_MOB = 10;
 }
 	

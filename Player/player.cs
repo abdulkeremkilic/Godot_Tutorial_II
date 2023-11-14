@@ -1,14 +1,18 @@
 using Godot;
 using System;
+using System.Collections;
 
 public partial class player : CharacterBody2D
 {
-	private int jumpCounter = 0;
-	public long health = 10;
 
+    [Signal]
+	public delegate void mobKilledEventHandler();
+
+	private int jumpCounter = 0;
+	public long health = 100;
+    public AnimationPlayer animations;
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	private float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
-	private AnimationPlayer animations;
 	Vector2 velocity;
 
 	public override void _Ready()
@@ -80,6 +84,7 @@ public partial class player : CharacterBody2D
 		{
 			this.velocity.Y = Globals.BOUNCE_VELOCITY_Y;
 			Velocity = velocity;
+            EmitSignal(SignalName.mobKilled);
 		}
 	}
 

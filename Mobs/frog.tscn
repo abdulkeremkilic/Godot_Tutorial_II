@@ -234,7 +234,6 @@ sprite_frames = SubResource("SpriteFrames_iyvno")
 animation = &"jump"
 
 [node name="PlayerDetection" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
 visible = false

@@ -5,8 +5,9 @@ public partial class frog : CharacterBody2D
 {
 	private float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 	private AnimationPlayer animations;
-	private Boolean isChasing = false;
+	private bool isChasing = false;
 	private player player;
+	private score score;
 	Vector2 velocity;
 	Vector2 direction;
 
@@ -14,8 +15,9 @@ public partial class frog : CharacterBody2D
 	public override void _Ready()
 	{
 		animations = GetNode<AnimationPlayer>("AnimationPlayer");
-		animations.Play("idle");
+		//score = (score) GetNode<Label>("../../Utils/score");
 		player = (player)GetNode<CharacterBody2D>("../../Player/Player");
+		animations.Play("idle");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -70,8 +72,9 @@ public partial class frog : CharacterBody2D
 		if (body.Name == "Player")
 		{
 			isChasing = false;
-			animations.Play("death");
+			animations.Play("death"); //overrides something so doesnt work
 			this.QueueFree();
+			//score.scoreLable += 1;
 		}
 	}
 
@@ -79,8 +82,7 @@ public partial class frog : CharacterBody2D
 	{
 		if (body.Name == "Player")
 		{
-			//this.player.health -= 2;
-			//add health here for 
+			this.player.health -= 2;
 		}
 	}
 

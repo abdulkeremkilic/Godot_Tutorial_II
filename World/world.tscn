@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dk12soygryon8"]
+[gd_scene load_steps=12 format=3 uid="uid://dk12soygryon8"]
 
 [ext_resource type="PackedScene" uid="uid://iwn3dwvatmjr" path="res://Player/player.tscn" id="1_lux32"]
 [ext_resource type="Texture2D" uid="uid://b8h5k6ckyoouu" path="res://sprites/tileset.png" id="1_rdgoa"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://UI/HP.cs" id="6_8sx1h"]
 [ext_resource type="Script" path="res://Mobs/Utils/mobCount.cs" id="7_h36l8"]
 [ext_resource type="Script" path="res://UI/score.cs" id="8_4x04t"]
+[ext_resource type="Script" path="res://UI/fps.cs" id="9_ukfqn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wcpf7"]
 texture = ExtResource("1_rdgoa")
@@ -462,10 +463,19 @@ offset_right = 96.0
 offset_bottom = 90.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-text = "SCORE: "
+text = "SCORE: 0"
 script = ExtResource("8_4x04t")
+
+[node name="fps" type="Label" parent="UI"]
+offset_left = 1055.0
+offset_right = 1095.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "fps:"
+script = ExtResource("9_ukfqn")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
+[connection signal="mobKilled" from="Player/Player" to="UI/Score" method="onMobKilled"]
 [connection signal="timeout" from="Timer" to="Mobs" method="onTimeout"]

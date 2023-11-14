@@ -1,10 +1,12 @@
 using Godot;
-using System;
 
 public partial class score : Label
 {
-	int scoreLable = 0;
+	public int scoreLable = 0;
 
-	
+	private void onMobKilled() {
+		scoreLable += 1;
+		this.Text = "SCORE: " + scoreLable;
+	}
 	
 }

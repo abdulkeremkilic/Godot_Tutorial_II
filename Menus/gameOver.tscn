@@ -10,16 +10,16 @@ script = ExtResource("1_wilxn")
 
 [node name="Play Again" type="Button" parent="."]
 offset_left = 448.0
-offset_top = 176.0
+offset_top = 240.0
 offset_right = 744.0
-offset_bottom = 336.0
+offset_bottom = 400.0
 text = "PLAY AGAIN"
 
 [node name="Main Menu" type="Button" parent="."]
 offset_left = 448.0
-offset_top = 408.0
+offset_top = 432.0
 offset_right = 744.0
-offset_bottom = 568.0
+offset_bottom = 592.0
 text = "MAIN MENU"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
@@ -30,6 +30,15 @@ offset_bottom = 136.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 40
 text = "GAME OVER"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 480.0
+offset_top = 160.0
+offset_right = 644.0
+offset_bottom = 205.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Your Score:"
 
 [connection signal="pressed" from="Play Again" to="." method="onPlayAgainButtonPressed"]
 [connection signal="pressed" from="Main Menu" to="." method="onMainMenuButtonPressed"]

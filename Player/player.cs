@@ -1,34 +1,34 @@
 using Godot;
-using System;
-using System.Collections;
+
 
 public partial class player : CharacterBody2D
 {
 
     [Signal]
-	public delegate void mobKilledEventHandler();
+    public delegate void mobKilledEventHandler();
 
-	private int jumpCounter = 0;
-	public long health = 100;
+    private bool isBouncing = false;
+    private int jumpCounter = 0;
+    public long health = 100;
     public AnimationPlayer animations;
-	// Get the gravity from the project settings to be synced with RigidBody nodes.
-	private float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
-	Vector2 velocity;
-
-	public override void _Ready()
-	{
-		animations = GetNode<AnimationPlayer>("AnimationPlayer");
-		animations.Play("idle");
-	}
-	public override void _PhysicsProcess(double delta)
+    private float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+    Vector2 velocity;
+    Vector2 direction;
+    public override void _Ready()
     {
+        animations = GetNode<AnimationPlayer>("AnimationPlayer");
+        animations.Play("idle");
+    }
+
+
+    public override void _PhysicsProcess(double delta)
+    {
+        velocity = Velocity;
 
         if (this.health <= 0)
         {
             GetTree().ChangeSceneToFile("res://Menus/gameOver.tscn");
         }
-
-        velocity = Velocity;
 
         renewJumpAction();
 
@@ -37,7 +37,7 @@ public partial class player : CharacterBody2D
             velocity.Y += gravity * (float)delta;
 
         // Handle Jump.
-        if (Input.IsActionJustPressed("ui_accept") && jumpCounter <= Globals.MAX_JUMP_LIMIT)
+        if (Input.IsActionJustPressed("ui_accept") && jumpCounter < Globals.MAX_JUMP_LIMIT)
         {
             velocity.Y = Globals.JUMP_VELOCITY;
             animations.Play("jump");
@@ -52,7 +52,15 @@ public partial class player : CharacterBody2D
             GetNode<AnimatedSprite2D>("Animations").FlipH = false;
 
 
-        if (direction != Vector2.Zero)
+        if (isBouncing)
+        {
+            if (Mathf.Abs(velocity.Y) < 0.1)
+            {
+                isBouncing = false;
+                animations.Play("idle");
+            }
+        }
+        else if (direction != Vector2.Zero)
         {
             velocity.X = direction.X * Globals.SPEED;
             if (velocity.Y == 0)
@@ -60,8 +68,8 @@ public partial class player : CharacterBody2D
         }
         else
         {
-            velocity.X = Mathf.MoveToward(Velocity.X, 0, Globals.SPEED);
-            if (velocity.Y == 0)
+            velocity.X = Mathf.MoveToward(Velocity.X, 0, Globals.SPEED); //burası bounce'yi override ediyor.
+            if (velocity.Y == 0 && velocity.X == 0)
                 animations.Play("idle");
         }
 
@@ -79,26 +87,29 @@ public partial class player : CharacterBody2D
     }
 
     private void onBodyEntered(Node2D body)
-	{
-		if (body.IsInGroup("Mob"))
-		{
-			this.velocity.Y = Globals.BOUNCE_VELOCITY_Y;
-			Velocity = velocity;
+    {
+        if (body.IsInGroup("Mob"))
+        {
+            this.velocity.Y = Globals.BOUNCE_VELOCITY_Y;
+            Velocity = velocity;
+            this.jumpCounter += 1;
             EmitSignal(SignalName.mobKilled);
-		}
-	}
+        }
+    }
 
-	private void onHurtBodyEntered(Node2D body)
-	{
-		if (body.IsInGroup("Mob"))
-		{
-			this.health -= 2;
-			animations.Play("hurt");
-			Vector2 direction = (this.Position - this.Position).Normalized();
-			this.velocity.Y = Globals.BOUNCE_VELOCITY_Y;
-			this.velocity.X = - direction.X *  Globals.BOUNCE_VELOCITY_X; // TODO: doesnt work; it may be try to override something! 
-			Velocity = velocity;
-		}
-	}
+    private void onHurtBodyEntered(Node2D body)
+    {
+        if (body.IsInGroup("Mob"))
+        {
+            this.health -= 2;
+            animations.Play("hurt");
+            direction = (body.Position - this.Position).Normalized();
+            this.velocity.X = direction.X * Globals.BOUNCE_VELOCITY_X;
+            this.velocity.Y = Globals.BOUNCE_VELOCITY_Y;
+            GD.Print(velocity.X);
+            Velocity = velocity;
+            isBouncing = true;
+        }
+    }
 
 }

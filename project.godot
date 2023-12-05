@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 globals="*res://Utils/Globals.cs"
 HitStopManager="*res://Utils/Singletons/HitStopManager.cs"
+ScoreManager="*res://Utils/Singletons/ScoreManager.cs"
 
 [display]
 

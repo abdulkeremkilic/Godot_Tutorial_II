@@ -258,5 +258,5 @@ shape = SubResource("RectangleShape2D_p24qw")
 [connection signal="body_entered" from="PlayerDetection" to="." method="onBodyEntered"]
 [connection signal="body_exited" from="PlayerDetection" to="." method="onBodyExit"]
 [connection signal="body_entered" from="HurtArea" to="." method="onHurtAreaEntered"]
-[connection signal="body_entered" from="AttackArea" to="." method="onPlayerCollitionEntered"]
 [connection signal="body_entered" from="AttackArea" to="." method="onAttackFallBack"]
+[connection signal="body_entered" from="AttackArea" to="." method="onPlayerCollitionEntered"]
